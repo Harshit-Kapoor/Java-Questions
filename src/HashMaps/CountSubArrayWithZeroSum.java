@@ -19,12 +19,18 @@ public class CountSubArrayWithZeroSum {
             i++;
             sum += arr[i];
 
-            if (fhm.containsKey(sum) == false) {
-                fhm.put(sum, 1);
-            } else {
+//            if (fhm.containsKey(sum) == false) {
+//                fhm.put(sum, 1);
+//            } else {
+//                count += fhm.get(sum);
+//                fhm.put(sum, fhm.get(sum) + 1);
+//            }
+
+            if (fhm.containsKey(sum)) {
                 count += fhm.get(sum);
-                fhm.put(sum, fhm.get(sum) + 1);
             }
+
+            fhm.put(sum, fhm.getOrDefault(sum, 0) + 1);
 
         }
 
