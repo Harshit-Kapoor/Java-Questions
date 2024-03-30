@@ -10,20 +10,26 @@ public class CountSubArraySumEqualsToK {
         int k = 5;
 
         HashMap<Integer, Integer> map = new HashMap<>();
-        int i = -1; int j = -1; int sum = 0; int ans = 0;
+        int i = -1; int sum = 0; int ans = 0;
 
         map.put(sum, 1);
 
         while (i < arr.length - 1) {
             i++;
             sum += arr[i];
-            //int remainingSum = sum - k;
 
-            if (map.containsKey(sum - k)) {
+            if (map.containsKey(sum - k) == false) {
+                map.put(sum, 1);
+            } else {
                 ans += map.get(sum - k);
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
             }
 
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
+//            if (map.containsKey(sum - k)) {
+//                ans += map.get(sum - k);
+//            }
+//
+//            map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
 
         System.out.println(ans);
