@@ -14,7 +14,7 @@ class Solution {
         for (int j = 0; j < m; j++)
             col[j] = 0;
 
-        // Count the number of 1s in each row and each column
+        // Count the number of 1s in each row and each columnx
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (mat[i][j] == 1) {
