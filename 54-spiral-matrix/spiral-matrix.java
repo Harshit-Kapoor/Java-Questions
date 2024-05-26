@@ -13,34 +13,28 @@ class Solution {
             // Top Row (left to right)
             for (int c = leftCol; c < rightCol; ++c)
                 lst.add(arr[topRow][c]);
-                // System.out.print(arr[topRow][c] + " ");
 
             if (topRow == botRow) {
                 lst.add(arr[topRow][rightCol]);
-                //System.out.print(arr[topRow][rightCol] + " ");
                 break;
             }
 
             // Right Col (top to bottom)
             for (int r = topRow; r < botRow; ++r)
                 lst.add(arr[r][rightCol]);
-                //System.out.print(arr[r][rightCol] + " ");
 
             if (leftCol == rightCol) {
                 lst.add(arr[botRow][rightCol]);
-                //System.out.print(arr[botRow][rightCol] + " ");
                 break;
             }
 
             // Bot Row (right to left)
             for (int c = rightCol; c > leftCol; --c)
                 lst.add(arr[botRow][c]);
-                //System.out.print(arr[botRow][c] + " ");
 
             // Left Col (bottom to top)
             for (int r = botRow; r > topRow; --r)
                 lst.add(arr[r][leftCol]);
-                //System.out.print(arr[r][leftCol] + " ");
 
             // Compress the boundary
             topRow++;
