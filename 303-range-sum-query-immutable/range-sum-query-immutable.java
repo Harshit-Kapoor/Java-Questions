@@ -5,10 +5,10 @@ class NumArray {
     public NumArray(int[] nums) {
         
         int n = nums.length;
-        this.prefixSum = new int[n];
+        prefixSum = new int[n];
         
         for(int i=0; i<n; i++) {
-            this.prefixSum[i] = i == 0 ? nums[0] : this.prefixSum[i-1] + nums[i];
+            prefixSum[i] = i == 0 ? nums[0] : prefixSum[i-1] + nums[i];
         }
         
     }
