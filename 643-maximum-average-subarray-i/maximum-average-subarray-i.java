@@ -28,4 +28,36 @@ class Solution {
 
         return maxAvg;
     }
+    
+    /*
+    public double findMaxAverage(int[] nums, int k) {
+        // If the array has only one element, return the element itself as the maximum average
+        if (nums.length == 1)
+            return (double) nums[0];
+
+        int start = 0;
+        int end = k;
+        double average = 0;
+
+        // Calculate the initial average of the first k elements
+        for (int i = 0; i < k; i++) {
+            average = average + (double) nums[i] / k;
+        }
+
+        // Set the initial maximum average to the calculated average
+        double max = average;
+
+        while (end < nums.length) {
+            // Slide the window and update the average
+            average = average - (double) nums[start++] / k;
+            average = average + (double) nums[end++] / k;
+
+            // Update the maximum average if the current average is greater
+            max = Math.max(average, max);
+        }
+
+        return max;
+    }
+    
+    */
 }
