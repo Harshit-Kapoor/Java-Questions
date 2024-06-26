@@ -1,6 +1,39 @@
 class Solution {
+    
+    public static double findMaxAverage(int[] arr, int k) {
+ 
+        if (arr.length == 1) {
+            return (double) (arr[0] / k);
+        }
         
-    public static double findMaxAverage(int[] nums, int k) {
+        int i = 0;
+        int j = 0;
+        double n = arr.length;
+        double sum = 0;
+        double max = Double.NEGATIVE_INFINITY;
+
+        while (j < n) {
+
+            sum += arr[j];
+
+            if (j - i + 1 < k) {
+                j++;
+            }
+
+            else if (j - i + 1 == k) {
+                double avg =  sum / (double) k;
+                max = Math.max(max, avg);
+                sum -= arr[i];
+                i++;
+                j++;
+            }
+        }
+
+        return max;
+
+    }
+    
+/*    public static double findMaxAverage(int[] nums, int k) {
 
         int[] prefixSum = new int[nums.length];
 
@@ -28,7 +61,7 @@ class Solution {
 
         return maxAvg;
     }
-    
+*/    
     /*
     public double findMaxAverage(int[] nums, int k) {
         // If the array has only one element, return the element itself as the maximum average
