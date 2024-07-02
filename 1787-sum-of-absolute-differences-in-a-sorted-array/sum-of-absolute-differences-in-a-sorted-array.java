@@ -6,15 +6,13 @@ class Solution {
         int[] suffixSum = new int[n];
 
         // Calculate and initialize the prefix sums & suffixSum array
-        prefixSum[0] = nums[0];
-        suffixSum[n - 1] = nums[n - 1];
-
+        for (int i=0; i<n; i++) 
+            prefixSum[i] = (i == 0) ? nums[i] : prefixSum[i-1] + nums[i];
+           
         // Calculate the prefix sums & suffixSum array in one loop
-        for (int i = 1; i < n; ++i) {
-            prefixSum[i] = prefixSum[i - 1] + nums[i];
-            suffixSum[n - i - 1] = suffixSum[n - i] + nums[n - i - 1];
-        }
-
+        for (int i=n-1; i>=0; i--)         
+            suffixSum[i] = (i == n-1) ? nums[i] : suffixSum[i+1] + nums[i];
+           
         // Calculate absolute differences and update the result array
         for (int i = 0; i < n; ++i) {
             int currentAbsoluteDiff = ((nums[i] * i) - prefixSum[i]) + (suffixSum[i] - (nums[i] * (n - i - 1)));
