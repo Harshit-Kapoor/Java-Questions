@@ -3,7 +3,7 @@ class Solution {
 
         if (x == 1) return 1;    
         int start = 1;
-        int end = x / 2;
+        int end = x;
         int ans = 0;
 
         while (start <= end) {
