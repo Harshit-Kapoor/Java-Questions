@@ -1,84 +1,54 @@
 class Solution {
+    public static int[] getSubarrayBeauty(int[] nums, int k, int x) {
+        TreeMap<Integer, Integer> freqMap = new TreeMap<>();
+        ArrayList<Integer> result = new ArrayList<>();
 
-    public int[] getSubarrayBeauty(int[] nums, int k, int x) {
-        int[] arr = new int[101];
-        int totalNagetive = 0;
-        int[] result = new int[nums.length - k + 1];
-        int index = 0;
-        int left = 0;
-        for (int right = 0; right < nums.length; right++) {
-            if (nums[right] < 0)
-                totalNagetive++;
-            arr[nums[right] + 50]++;
-            while (right - left + 1 > k) {
-                arr[nums[left] + 50]--;
-                if (nums[left] < 0)
-                    totalNagetive--;
-                left++;
-            }
-            if (right - left + 1 == k) {
-                if (x <= totalNagetive)
-                    result[index] = findXSmallest(arr, x);
-                index++;
-            }
-        }
-        return result;
-    }
-    
-    public int findXSmallest(int[] arr, int x) {
-        for (int i = 0; i < 50; i++) {
-            x -= arr[i];
-            if (x <= 0) {
-                return i - 50;
-            }
-        }
-        return 0;
-    }
-    
-/*    public static int[] getSubarrayBeauty(int[] arr, int k, int x) {
-
-      NOT ALL TC PASSING
-        int n = arr.length;
-        int[] ans = new int[n - k + 1];
-        int ansIndex = 0;
         int i = 0;
         int j = 0;
-        List<Integer> lst = new ArrayList<Integer>();
 
-        while (j < n) {
-
-            if (arr[j] < 0) {
-                lst.add(arr[j]);
+        while (j < nums.length) {
+            if (nums[j] < 0) {
+                freqMap.put(nums[j], freqMap.getOrDefault(nums[j], 0) + 1);
             }
 
-            if (j - i + 1 < k) {
-                j++;
-            } else if (j - i + 1 == k) {
-
-                List<Integer> copy = new ArrayList<Integer>();
-
-                if (!lst.isEmpty()) {
-                    copy.addAll(lst);
-                    Collections.sort(copy);
-                    ans[ansIndex++] = copy.get(x - 1);
-
-                    if (arr[i] == lst.get(0)) {
-                        lst.remove(0);
+            if (j - i + 1 == k) {
+                int beauty = getKthSmallestNegative(freqMap, x);
+                result.add(beauty);
+                if (nums[i] < 0) {
+                    int count = freqMap.get(nums[i]);
+                    if (count == 1) {
+                        freqMap.remove(nums[i]);
+                    } else {
+                        freqMap.put(nums[i], count - 1);
                     }
-                    copy.clear();
-                } else {
-                    ans[ansIndex++] = 0;
                 }
-
                 i++;
-                j++;
-
-
             }
+            j++;
         }
 
-        return ans;
+        // Convert ArrayList to array
+        int[] res = new int[result.size()];
+        for (int idx = 0; idx < result.size(); idx++) {
+            res[idx] = result.get(idx);
+        }
 
+        return res;
     }
-*/
+
+    private static int getKthSmallestNegative(TreeMap<Integer, Integer> freqMap, int x) {
+        if (freqMap.isEmpty()) {
+            return 0; // If there are no negative numbers, return 0
+        }
+
+        int count = 0;
+        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
+            count += entry.getValue();
+            if (count >= x) {
+                return entry.getKey(); // Return the xth smallest negative number
+            }
+        }
+        return 0; // If there are fewer than x negative numbers, return 0
+    }
+
 }
