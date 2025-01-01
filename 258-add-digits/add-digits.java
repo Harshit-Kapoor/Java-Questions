@@ -1,17 +1,25 @@
 class Solution {
     public static int addDigits(int num) {
-        while(num>=10) {
-			/*
-			Find current digit sum at each step until
-			digit sum reaches a value <= 9.
-			*/
-            int currSum = 0;
-            while(num>0) {
-                currSum += num%10;
-                num /= 10;
-            }
-            num = currSum;
+
+        while (num >= 10) {
+
+            num = findSum(num);
+
         }
+
         return num;
     }
+
+    private static int findSum(int num) {
+
+        int sum = 0;
+
+        while (num > 0) {
+            sum = sum + (num % 10);
+            num = num / 10;
+        }
+
+        return sum;
+    }
+
 }
