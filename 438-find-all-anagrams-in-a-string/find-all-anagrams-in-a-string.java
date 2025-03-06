@@ -1,49 +1,59 @@
 class Solution {
+    public static List<Integer> findAnagrams(String s, String p) {
 
-public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> ans = new ArrayList<>();
-        
-        int k = p.length();
-        HashMap<Character, Integer> map = new HashMap<>();
-        
-        for(int i=0;i<k;i++){
-            map.put(p.charAt(i), map.getOrDefault(p.charAt(i), 0) + 1);
-        }
-        
-        int count = map.size();
+        List<Integer> result = new ArrayList<>();
+
         int i = 0, j = 0;
-        
-        while(j < s.length()){
-            // Calculation:
-            char ch = s.charAt(j);
-            if(map.containsKey(ch)){
-                map.put(ch, map.get(ch)-1);
-                if(map.get(ch) == 0){
+
+        int stringLength = s.length();
+        int patternLength = p.length();
+
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int k = 0; k < patternLength; k++) {
+            map.put(p.charAt(k), map.getOrDefault(p.charAt(k), 0) + 1);
+        }
+
+        int count = map.size();
+
+        while (j < stringLength) {
+
+            char c = s.charAt(j);
+
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) - 1);
+                if (map.get(c) == 0) {
                     count--;
                 }
             }
-            
-            
-            if(j-i+1 < k){
+
+            if (j - i + 1 < patternLength) {
                 j++;
-            }
-            
-            else if(j-i+1 == k){
-                if(count == 0){
-                    ans.add(i);
+            } else {
+
+                if (count == 0) {
+                    result.add(i);
                 }
-                char ch1 = s.charAt(i);
-                if(map.containsKey(ch1)){
-                    map.put(ch1, map.get(ch1)+1);
-                    if(map.get(ch1) == 1){
+
+                //if (map.containsKey(s.charAt(i))) {  we are using this bcz
+                // since we are removing only pattern ke chars then we'll add only
+                // pattern ke chars which are present in map
+
+                if (map.containsKey(s.charAt(i))) {
+                    map.put(s.charAt(i), map.get(s.charAt(i)) + 1);
+                    if (map.get(s.charAt(i)) == 1) {
                         count++;
                     }
                 }
+
                 i++;
                 j++;
+
             }
+
         }
-        
-        return ans;
+
+        return result;
+
     }
 }
