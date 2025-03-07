@@ -1,45 +1,34 @@
 class Solution {
 
     public static int compress(char[] chars) {
-            
-        char prevChar = chars[0];
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(prevChar);
+        int index = 0;
+        int i = 0;
 
-        int count = 1;
+        while (i < chars.length){
 
-        for (int i = 1; i < chars.length; i++) {
+            char curr_char = chars[i];
+            int count = 0;
 
-            if (prevChar == chars[i]) {
-
+            // to find duplicates
+            while (i < chars.length && curr_char == chars[i]) {
                 count++;
+                i++;
+            }
 
-            } else {
+            // now do the assigning part
+            chars[index] = curr_char;
+            index++;
 
-                if (count > 1) {
-                    sb.append(count);
+            if (count > 1) {
+                for (char c : String.valueOf(count).toCharArray()) {
+                    chars[index++] = c;
                 }
-                prevChar = chars[i];
-                count = 1;
-                sb.append(prevChar);
             }
 
         }
 
-        if (count > 1) {
-            sb.append(count);
-        }
-
-        String ans = sb.toString();
-
-        char[] c = ans.toCharArray();
-
-        for (int i=0; i<c.length; i++) {
-            chars[i] = c[i];
-        }
-
-        return sb.length();
+        return index;
 
     }
     
