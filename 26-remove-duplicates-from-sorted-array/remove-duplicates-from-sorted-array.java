@@ -1,31 +1,23 @@
 class Solution {
-    
-    public int removeDuplicates(int[] nums) {
-        int j = 1;
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] != nums[i - 1]) {
-                nums[j] = nums[i];
-                j++;
-            }
+
+        public int removeDuplicates(int[] nums) {
+
+        Map<Integer, Integer> map = new LinkedHashMap<>();
+
+        for (int e : nums) {
+            map.put(e, map.getOrDefault(e, 0) + 1);
         }
-        return j;
-    
-    
-/**    public static int removeDuplicates(int[] nums) {
 
+        int size = map.size();
 
-         HashMap<Integer, Integer> map = new HashMap<>();
-         int index = 0;
-         for(int num:nums){
-            if(!map.containsKey(num)){
-                nums[index++] = num;
-                map.put(num,num);
-            }
-         }
+        int  i = 0;
+        for (int e : map.keySet()) {
+            nums[i] = e;
+            i++;
+        }
 
-         return index;
+        return size;
+
     }
     
-     */
-    }
 }
