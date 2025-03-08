@@ -1,45 +1,37 @@
 class Solution {
     
-     public static boolean isVowel(char c) {
-            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
-                return true;
-            }
-            return false;
-        }
+    public static boolean isVowel(char c) {
+        return (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
+    }
 
-        public static String reverseVowels(String s) {
+    public static String reverseVowels(String s) {
 
-            int start = 0;
-            int end = s.length() - 1;
+        int i = 0;
+        int j = s.length() - 1;
 
-            StringBuilder sb = new StringBuilder(s);
+        StringBuilder sb = new StringBuilder(s);
 
-            while (start < end) {
+        while (i < j) {
 
-                if (isVowel(s.charAt(start)) == true && isVowel(s.charAt(end)) == true) {
-                    char temp = sb.charAt(start);
-                    sb.setCharAt(start, sb.charAt(end));
-                    sb.setCharAt(end, temp);
-                    start++;
-                    end--;
-                }
-
-                else if (isVowel(s.charAt(start)) == true && isVowel(s.charAt(end)) == false) {
-                    end--;
-                }
-
-                else if (isVowel(s.charAt(start)) == false && isVowel(s.charAt(end)) == true) {
-                    start++;
-                }
-
-                else if (isVowel(s.charAt(start)) == false && isVowel(s.charAt(end)) == false) {
-                    start++;
-                    end--;
-                }
-
+            if (!isVowel(s.charAt(i)) && isVowel(s.charAt(j))) {
+                i++;
+            } else if (isVowel(s.charAt(i)) && !isVowel(s.charAt(j))) {
+                j--;
+            } else if (isVowel(s.charAt(i)) && isVowel(s.charAt(j))) {
+                char temp = s.charAt(i);
+                sb.setCharAt(i, s.charAt(j));
+                sb.setCharAt(j, temp);
+                i++;
+                j--;
+            } else {
+                i++;
+                j--;
             }
 
-            return sb.toString();
-
         }
+
+        return sb.toString();
+
+    }
+
 }
