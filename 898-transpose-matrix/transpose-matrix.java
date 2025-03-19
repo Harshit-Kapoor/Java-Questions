@@ -1,18 +1,19 @@
 class Solution {
 
     public int[][] transpose(int[][] A) {
-    
-        int M = A.length;
-        int N = A[0].length;
-        
-        int[][] B = new int[N][M]; 
 
-        for (int j = 0; j < N; j++) {
-            for (int i = 0; i < M; i++) {
-                B[j][i] = A[i][j]; 
+        int row = A.length;
+        int col = A[0].length;
+
+        int[][] transpose = new int[col][row];
+
+        for (int i=0; i<row; i++) {
+            for (int j=0; j<col; j++) {
+                transpose[j][i] = A[i][j];
             }
         }
-        
-        return B;
+
+        return transpose;
+
     }
 }
