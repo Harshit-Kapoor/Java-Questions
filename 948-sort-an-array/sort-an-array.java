@@ -1,49 +1,57 @@
 class Solution {
-    public static int[] merge2Sorted(int left[], int right[]) {
-        int n1 = left.length, n2 = right.length;
-        int i = 0, j = 0;
 
-        int ans[] = new int[n1 + n2];
-        int k = 0;
-
-        while (i < n1 && j < n2) {
-            if (left[i] <= right[j]) {
-                ans[k] = left[i];
-                i++;
-            } else {
-                ans[k] = right[j];
-                j++;
-            }
-            k++;
-        }
-
-        while (i < n1) {
-            ans[k] = left[i];
-            i++;
-            k++;
-        }
-
-        while (j < n2) {
-            ans[k] = right[j];
-            j++;
-            k++;
-        }
-
-        return ans;
-    }
+    // Counting Sort
 
     public static int[] sortArray(int[] nums) {
+
         int n = nums.length;
 
-        if (n == 1)
-            return nums;
+        // take max and min of the given array
 
-        int left[] = Arrays.copyOfRange(nums, 0, n / 2); // -> [0, n/2)
-        int right[] = Arrays.copyOfRange(nums, n / 2, n); // -> [n/2, n)
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
 
-        left = sortArray(left); // recursive call to sort the left half
-        right = sortArray(right); // recursive call to sort the right half
+        for (int num : nums) {
+            max = Math.max(num, max);
+            min = Math.min(num, min);
+        }
 
-        return merge2Sorted(left, right);
+        // Create a llist containing all numbers from min to max 
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = min; i <= max; i++) {
+            list.add(i);
+        }
+
+        // Creating frequency map of nums
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i=0; i<nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+
+        // Now iterate over the list check if element is present in list then uski freq jitna add krdo
+
+        int[] result = new int[n];
+
+        int pointer = 0;
+
+        for (int e : list) {
+
+            if (map.containsKey(e)) {
+
+                for (int i=0; i<map.get(e); i++) {
+                    result[pointer] = e;
+                    pointer++;
+                }
+
+            }
+
+        }
+
+        return result;
+
     }
 }
