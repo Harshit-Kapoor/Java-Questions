@@ -47,3 +47,50 @@ class Solution {
         return max;
     }
 }
+
+// class Solution {
+//     public long maximumSubarraySum(int[] arr, int k) {
+
+//         int i = 0;
+//         int j = 0;
+//         int n = arr.length;
+//         int sum = 0;
+//         long max = 0;
+
+//         HashMap<Integer, Integer> map = new HashMap<>();
+
+//         while (j < n) {
+
+//             map.put(arr[j], map.getOrDefault(arr[j], 0) + 1);
+//             sum += arr[j];
+
+//             if (j - i + 1 < k) {
+//                 j++;
+//             } else if (j - i + 1 == k) {
+
+//                 if (map.size() == k) {
+//                     max = Math.max(sum, max);
+//                 }
+
+//                 sum -= arr[i];
+//                 if (map.containsKey(arr[i]) == true) {
+//                     int count = map.get(arr[i]);
+//                     if (count == 1) {
+//                         map.remove(arr[i]);
+//                     } else {
+//                         map.put(arr[i], map.get(arr[i]) - 1);
+//                     }
+//                 }
+
+//                 i++;
+//                 j++;
+
+//             }
+
+//         }
+
+//         return max;
+        
+
+//     }
+// }
