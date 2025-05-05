@@ -3,24 +3,26 @@ class Solution {
         
         HashMap<Character, Character> map = new HashMap<>();
 
-        for (int i=0; i<s.length(); i++) {
+        for (int i=0; i < s.length(); i++) {
 
-            char originalCharacter = s.charAt(i);
-            char replacedCharacter = t.charAt(i);            
+            char originalChar = s.charAt(i);
+            char replacedChar = t.charAt(i);
 
-            if (!map.containsKey(originalCharacter)) {
-                if (!map.containsValue(replacedCharacter)) {
-                    map.put(originalCharacter, replacedCharacter);
+            if (!map.containsKey(originalChar)) {
+
+                if (!map.containsValue(replacedChar)) {
+                    map.put(originalChar, replacedChar);
                 } else {
                     return false;
                 }
+
             } else {
-                char temp = map.get(originalCharacter);
-                if (temp != replacedCharacter) {
+
+                char temp = map.get(originalChar);
+                if (temp != replacedChar) {
                     return false;
                 }
             }
-
 
         }
 
